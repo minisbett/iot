@@ -1,0 +1,3 @@
+Clock Control Register 4 bis 7: CLKx_PND => Write this bit to a 1 when programming a Si5351A-B-GT 10-MSOP Device.
+
+In der Dokumentation darauf hinweisen, dass die Register Klassen keine semantischen Überprüfungen durchführen.

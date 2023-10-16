@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <TargetFrameworks>$(DefaultTestTfms)</TargetFrameworks>
+    <StartupObject></StartupObject>
+  </PropertyGroup>
+
+  <!--<ItemGroup>
+    <Compile Include=".\Internal\Register\*.cs" />
+  </ItemGroup>-->
+
+  <ItemGroup>
+    <ProjectReference Include="../Si5351.csproj" />
+  </ItemGroup>
+
+</Project>

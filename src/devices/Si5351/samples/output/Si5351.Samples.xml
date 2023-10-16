@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Si5351.Samples</name>
+    </assembly>
+    <members>
+        <member name="T:Si5351.Samples.RegisterAccessConsole">
+            <summary>
+            A simple console to access various registers of the device directly.
+            This allows playing around with settings and learn how the device behaves.
+            Besides the register classes also a direct memory access by address is available.
+            </summary>
+        </member>
+        <member name="M:Si5351.Samples.RegisterAccessConsole.#ctor(System.Device.I2c.I2cDevice)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Si5351.Samples.RegisterAccessConsole"/> class.
+            </summary>
+        </member>
+        <member name="M:Si5351.Samples.RegisterAccessConsole.Loop">
+            <summary>
+            Main loop of the conosle. The loop continues until the RET (return) command is entered.
+            </summary>
+        </member>
+    </members>
+</doc>

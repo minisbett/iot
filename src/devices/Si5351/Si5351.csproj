@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>$(DefaultBindingTfms)</TargetFrameworks>
+    <EnableDefaultItems>false</EnableDefaultItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="*.cs" />
+    <Compile Include=".\Internal\**\*.cs" />
+    <Compile Include=".\Common\**\*.cs" />
+    <None Include="README.md" />
+  </ItemGroup>
+
+  <!-- Make the internal classes visible to the unit test assembly -->
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>$(AssemblyName).Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <!-- Get rid of nasty error messages in VS code -->
+  <Target Name="Compile">
+  </Target>
+  <Target Name="CoreCompile">
+  </Target>
+
+</Project>

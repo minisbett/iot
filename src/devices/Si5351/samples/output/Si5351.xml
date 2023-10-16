@@ -1,0 +1,1974 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Si5351</name>
+    </assembly>
+    <members>
+        <member name="T:Iot.Device.Si5351.DeviceOutputs">
+            <summary>
+            Defines the set of number of outputs.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.DeviceOutputs.ThreeOutputs">
+            <summary>
+            Device with 3 outputs.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.DeviceOutputs.FourOutputs">
+            <summary>
+            Device with 4 outputs.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.DeviceOutputs.EightOutputs">
+            <summary>
+            Device with 8 outputs.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.DeviceRevision">
+            <summary>
+            Defines the set of device revisions.
+            [1] Datasheet, revision 1.3, Skyworks Solution Inc., as of 2021-08-27
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.DeviceRevision.A">
+            <summary>
+            Device revision A (deprecated/discontinued)
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.DeviceRevision.B">
+            <summary>
+            Device version B (current revision)
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.DeviceRevision.Reserved1">
+            <summary>
+            Reserved
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.DeviceRevision.Reserved2">
+            <summary>
+            Reserved
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.DeviceStatus">
+            <summary>
+            Represents the Device Status.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.DeviceStatus.Revision">
+            <summary>
+            Device revision
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.DeviceStatus.ClockSignalValid">
+            <summary>
+            Clock signel (CLKIN pin) validity (only Si5351C)
+            </summary>
+            <value>True, if the signal is valid</value>
+        </member>
+        <member name="P:Iot.Device.Si5351.DeviceStatus.CrystalSignalValid">
+            <summary>
+            Crystal signal validitiy
+            </summary>
+            <value>True, if the signal is valid</value>
+        </member>
+        <member name="P:Iot.Device.Si5351.DeviceStatus.PllALocked">
+            <summary>
+            Locked state of PLL A.
+            </summary>
+            <value>True, if the PLL has been locked on a valid reference from either CLKIN or XTAL</value>
+        </member>
+        <member name="P:Iot.Device.Si5351.DeviceStatus.PllBLocked">
+            <summary>
+            Locked state of PLL B.
+            </summary>
+            <value>True, if the PLL has been locked on a valid reference from either CLKIN or XTAL</value>
+        </member>
+        <member name="P:Iot.Device.Si5351.DeviceStatus.Initialized">
+            <summary>
+            System initialization status.
+            IMPORTANT: do not perform any write operations (to NVRAM) before initialization has been completed.
+            </summary>
+            <value>True, if the device initialization has been completed</value>
+        </member>
+        <member name="M:Iot.Device.Si5351.DeviceStatus.#ctor(Iot.Device.Si5351.Internal.Register.DeviceStatusRegister)">
+            <summary>
+            Initializes a new intancec from a given register value
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.DeviceStatus.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.DeviceVersion">
+            <summary>
+            Defines the set of device versions.
+            [1] Datasheet, revision 1.3, Skyworks Solution Inc., as of 2021-08-27
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.DeviceVersion.A">
+            <summary>
+            Device version A (internal oscillator with XTAL only input, see [1] pg. 1)
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.DeviceVersion.B">
+            <summary>
+            Device version B (internal oscillator with XTAL input and internal VCXO with control input, see [1] pg. 1)
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.DeviceVersion.C">
+            <summary>
+            Device version C (like B version but with additional clock synchronization input, see [1] pg. 1)
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.InterruptMask">
+            <summary>
+            Represents the masks for signaling interrupts at the INTR pin (only Si5351C).
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.InterruptMask.SystemInitializationMask">
+            <summary>
+            System initialization interrupt mask
+            </summary>
+            <value>True prevents from setting INTR pin low if the interrupt occurs.</value>
+        </member>
+        <member name="P:Iot.Device.Si5351.InterruptMask.ClockSignalLossMask">
+            <summary>
+            Loss of clock signal (CLKIN) interrupt mask
+            </summary>
+            <value>True prevents from setting INTR pin low if the interrupt occurs.</value>
+        </member>
+        <member name="P:Iot.Device.Si5351.InterruptMask.CrystalSignalLossMask">
+            <summary>
+            Loss of crystal signal (XTAL) interrupt mask
+            </summary>
+            <value>True prevents from setting INTR pin low if the interrupt occurs.</value>
+        </member>
+        <member name="P:Iot.Device.Si5351.InterruptMask.PllALockLossMask">
+            <summary>
+            PLL A loss of lock interrupt mask
+            </summary>
+            <value>True prevents from setting INTR pin low if the interrupt occurs.</value>
+        </member>
+        <member name="P:Iot.Device.Si5351.InterruptMask.PllBLockLossMask">
+            <summary>
+            PLL A loss of lock interrupt mask
+            </summary>
+            <value>True prevents from setting INTR pin low if the interrupt occurs.</value>
+        </member>
+        <member name="M:Iot.Device.Si5351.InterruptMask.#ctor(Iot.Device.Si5351.Internal.Register.InterruptStatusMaskRegister)">
+            <summary>
+            Initializes a new intance from a given register value
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.InterruptMask.ToRegister">
+            <summary>
+            Create a new register instance initialized with the interrupt mask settings
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Iot.Device.Si5351.InterruptMask.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.InterruptStatus">
+            <summary>
+            Represents the stauts of the interrupt (sticky) bits
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.InterruptStatus.SystemInitialization">
+            <summary>
+            System initialization interrupt (SYS_INIT) status bit
+            </summary>
+            <value>True, if an interrupt has occured since it was last cleared.</value>
+        </member>
+        <member name="P:Iot.Device.Si5351.InterruptStatus.ClockSignalLoss">
+            <summary>
+            Loss of clock signal (CLKIN) interrupt status bit
+            </summary>
+            <value>True, if an interrupt has occured since it was last cleared.</value>
+        </member>
+        <member name="P:Iot.Device.Si5351.InterruptStatus.CrystalSignalLoss">
+            <summary>
+            Loss of crystal signal (XTAL) interrupt status bit
+            </summary>
+            <value>True, if an interrupt has occured since it was last cleared.</value>
+        </member>
+        <member name="P:Iot.Device.Si5351.InterruptStatus.PllALockLoss">
+            <summary>
+            PLL A loss of lock interrupt status
+            </summary>
+            <value>True, if the PLL has been locked on a valid reference from either CLKIN or XTAL</value>
+        </member>
+        <member name="P:Iot.Device.Si5351.InterruptStatus.PllBLockLoss">
+            <summary>
+            PLL A loss of lock interrupt status
+            </summary>
+            <value>True, if the PLL has been locked on a valid reference from either CLKIN or XTAL</value>
+        </member>
+        <member name="M:Iot.Device.Si5351.InterruptStatus.#ctor(Iot.Device.Si5351.Internal.Register.InterruptStatusStickyRegister)">
+            <summary>
+            Initializes a new intance from a given register value
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.InterruptStatus.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.OutputConfiguration">
+            <summary>
+            t.b.d.
+            </summary>
+            <param name="ControlledByOutputEnablePin">True, if the output is controlled by the output enable pin</param>
+        </member>
+        <member name="M:Iot.Device.Si5351.OutputConfiguration.#ctor(System.Boolean)">
+            <summary>
+            t.b.d.
+            </summary>
+            <param name="ControlledByOutputEnablePin">True, if the output is controlled by the output enable pin</param>
+        </member>
+        <member name="P:Iot.Device.Si5351.OutputConfiguration.ControlledByOutputEnablePin">
+            <summary>True, if the output is controlled by the output enable pin</summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Si5351Device">
+            <summary>
+            Binding for the Si5351 device family.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Si5351Device.DefaultI2cAddress">
+            <summary>
+            The device slave base address (0x60) consist of a 6-bit fixed address plus a user selectable LSB bit.
+            The LSB bit is selectable as 0 or 1 using the optional A0 pin which is useful for applications that
+            require more than one Si5351 on a single I2C bus.
+            If a part does not have the A0 pin, the default address is 0x60 with the A0 bit set to 0.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Device.#ctor(System.Device.I2c.I2cDevice,Iot.Device.Si5351.DeviceVersion,Iot.Device.Si5351.DeviceOutputs)">
+            <summary>
+            Initializes a new instance of the <see cref="N:Iot.Device.Si5351"/> binding and
+            assembles it for the specified device version (A/B/C) and number of outputs.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Device.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Device.Init">
+            <summary>
+            t.b.d.
+            </summary>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Device.Test">
+            <summary>
+            Just for testings
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Si5351Common">
+            <summary>
+            Binding for the Si5351 device family.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Si5351Common.DefaultI2cAddress">
+            <summary>
+            The device slave base address (0x60) consist of a 6-bit fixed address plus a user selectable LSB bit.
+            The LSB bit is selectable as 0 or 1 using the optional A0 pin which is useful for applications that
+            require more than one Si5351 on a single I2C bus.
+            If a part does not have the A0 pin, the default address is 0x60 with the A0 bit set to 0.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Si5351Common.Outputs">
+            <summary>
+            Gets the number of available outputs
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Common.#ctor(System.Device.I2c.I2cDevice,Iot.Device.Si5351.DeviceVersion,Iot.Device.Si5351.DeviceOutputs)">
+            <summary>
+            Initializes a new instance of the <see cref="N:Iot.Device.Si5351"/> binding and
+            assembles it for the specified device version (A/B/C) and number of outputs.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Common.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Common.Init">
+            <summary>
+            t.b.d.
+            </summary>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Common.GetDeviceStatus">
+            <summary>
+            Gets the current device status
+            </summary>
+            <returns>Device status</returns>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Common.ClearInterruptStatus">
+            <summary>
+            Clears all interrupt status flags
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Common.GetInterruptStatus">
+            <summary>
+            Gets the interrupt status flags
+            </summary>
+            <returns>Current interrupt status flags</returns>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Common.GetInterruptMask">
+            <summary>
+            Gets the interrupt masks
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Common.SetInterruptMask(Iot.Device.Si5351.InterruptMask)">
+            <summary>
+            Sets the interrupt masks
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Common.GetOutputState(System.Int32)">
+            <summary>
+            Gets the enabled state of the provided output number.
+            Note: the max. number of outputs depends on the respective device type.
+            An exception is thrown if an invalid number is provided.
+            </summary>
+            <param name="number">Number of the output</param>
+            <exception cref="T:System.ArgumentException">Invalid output number</exception>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Common.EnableOutput(System.Int32)">
+            <summary>
+            Enables an clock output of the device.
+            Note: the max. number of outputs depends on the respective device type.
+            An exception is thrown if an invalid number is provided.
+            </summary>
+            <param name="number">Number of the output to be enabled</param>
+            <exception cref="T:System.ArgumentException">Invalid output number</exception>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Common.DisableOutput(System.Int32)">
+            <summary>
+            Disables an clock output of the device.
+            </summary>
+            <param name="number">Number of the output to be enabled</param>
+            <exception cref="T:System.ArgumentException">Invalid output number</exception>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Common.GetOutputConfiguration(System.Byte)">
+            <summary>
+            t.b.d.
+            </summary>
+            <param name="number">t.b.d.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Common.SetOutputConfigure(System.Byte,Iot.Device.Si5351.OutputConfiguration)">
+            <summary>
+            t.b.d.
+            </summary>
+            <param name="number">t.b.d.</param>
+            <param name="configuration">t.b.d.</param>
+        </member>
+        <member name="M:Iot.Device.Si5351.Si5351Common.WriteClockBuilderSettings(System.String[])">
+            <summary>
+            Writes the settings, as generated by Clock Builder Pro, to the registers
+            of the device.
+            It parses the generated settings file and issues the related write operations
+            to the device.
+            Note: any setting will be applied. This includes also the configuration
+            of the clock outputs, so there is e.g. no option to prevent from enabling
+            any configured output.
+            </summary>
+            <param name="settingsFile">Line-wise content of settings file</param>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Address">
+            <summary>
+            Defines the register addresses of the Si5153A/B/C device with 10-MSOP and 20-QFN housing
+            according to AN619 ([1]).
+            Important: this address map, as well as various register layouts, IS NOT compatible with
+                       a device with 16-QFN housing according to AN1234.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.DeviceStatus">
+            <summary>
+            Device Status- register 0d/00h
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.InterruptStatusSticky">
+            <summary>
+            Interrrupt Status Sticky - register 1d/01h
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.InterruptStatusMask">
+            <summary>
+            Interrupt Status Mark - register 2d/02h
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.OutputEnableControl">
+            <summary>
+            Output Enable Control - register 3d/03h
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.OebPinEnableControlMask">
+            <summary>
+            OEB Pin Enable Control - register 9d/09h
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.PllInputSource">
+            <summary>
+            PLL Input Source - register 15
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.CLKx_Control">
+            <summary>
+            Base address of CLKx Control registers 0-7
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.CLK0_Control">
+            <summary>
+            CLK0 Control - register 16
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.CLK1_Control">
+            <summary>
+            CLK1 Control - register 17
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.CLK2_Control">
+            <summary>
+            CLK2 Control - register 18
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.CLK3_Control">
+            <summary>
+            CLK3 Control - register 19
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.CLK4_Control">
+            <summary>
+            CLK4 Control - register 20
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.CLK5_Control">
+            <summary>
+            CLK5 Control - register 21
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.CLK6_Control">
+            <summary>
+            CLK6 Control - register 22
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.CLK7_Control">
+            <summary>
+            CLK7 Control - register 23
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.CLK30_DisableState">
+            <summary>
+            CLK3-0 Disable State - register 24
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.CLK74_DisableState">
+            <summary>
+            CLK7-4 Disable State - register 25
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNAParameters_P3_15_8">
+            <summary>
+            Multisynth NA Parameter 3, bits 15:8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNAParameters_P3_7_0">
+            <summary>
+            Multisynth NA Parameter 3, bits 7:0
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNAParameters_P1_17_16">
+            <summary>
+            Multisynth NA Parameter 1, bits 17:16 @ bits 1:0
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNAParameters_P1_15_8">
+            <summary>
+            Multisynth NA Parameter 1, bits 15:8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNAParameters_P1_7_0">
+            <summary>
+            Multisynth NA Parameter 1, bits 7:0
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNAParameters_P3_19_16_P2_19_16">
+            <summary>
+            Multisynth NA Parameter 3, bits 19:16
+            Multisynth NA Parameter 2, bits 19:16
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNAParameters_P2_15_8">
+            <summary>
+            Multisynth NA Parameter 2, bits 15:8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNAParameters_P2_7_0">
+            <summary>
+            Multisynth NA Parameter 2, bits 7:0
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNBParameters_P3_15_8">
+            <summary>
+            Multisynth NB Parameter 3, bits 15:8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNBParameters_P3_7_0">
+            <summary>
+            Multisynth NB Parameter 3, bits 7:0
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNBParameters_P1_17_16">
+            <summary>
+            Multisynth NB Parameter 1, bits 17:16 @ bits 1:0
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNBParameters_P1_15_8">
+            <summary>
+            Multisynth NB Parameter 1, bits 15:8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNBParameters_P1_7_0">
+            <summary>
+            Multisynth NB Parameter 1, bits 7:0
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNBParameters_P3_19_16_P2_19_16">
+            <summary>
+            Multisynth NB Parameter 3, bits 19:16
+            Multisynth NB Parameter 2, bits 19:16
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNBParameters_P2_15_8">
+            <summary>
+            Multisynth NB Parameter 2, bits 15:8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthNBParameters_P2_7_0">
+            <summary>
+            Multisynth NB Parameter 2, bits 7:0
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthXParametersBase_P3_15_8">
+            <summary>
+            Multisynth X Parameter 3, bit 15:8
+            X is 0..5 with addr = base + x * 8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthXParametersBase_P3_7_0">
+            <summary>
+            Multisynth X Parameter 3, bit 7:0
+            X is 0..5 with addr = base + x * 8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthXParametersBase_R_4_P1_17_16">
+            <summary>
+            Multisynth X parameter 1 bits 17:16
+            X is 0..5 with addr = base + x * 8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.ClockOutputDivider_0_5">
+            <summary>
+            Multisynth X output divider, divide by 4 enable
+            X is 0..5 with addr = base + x * 8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthXParametersBase_P1_15_8">
+            <summary>
+            Multisynth X Parameter 1, bit 15:8
+            X is 0..5 with addr = base + x * 8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthXParametersBase_P1_7_0">
+            <summary>
+            Multisynth X Parameter 1, bit 7:0
+            X is 0..5 with addr = base + x * 8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisyntXParametersBase_P3_19_16_P2_19_16">
+            <summary>
+            Multisynth X Parameter 3, bits 19:16
+            Multisynth X Parameter 2, bits 19:16
+            X is 0..5 with addr = base + x * 8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthXParametersBase_P2_15_8">
+            <summary>
+            Multisynth X Parameter 2, bit 15:8
+            X is 0..5 with addr = base + x * 8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.MultisynthXParametersBase_P2_7_0">
+            <summary>
+            Multisynth X Parameter 2, bit 7:0
+            X is 0..5 with addr = base + x * 8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.Multisynth6Parameter1">
+            <summary>
+            Multisynth 6 Parameter 1, bit 7:0
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.Multisynth7Parameter1">
+            <summary>
+            Multisynth 7 Parameter 1, bit 7:0
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.ClockOutputDivider_6_7">
+            <summary>
+            Clock 6 and 7 Output Divider
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.PllReset">
+            <summary>
+            PLL Reset register
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.CrystalInternalLoadCapacitance">
+            <summary>
+            Crystal Internal Load Capacitance
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.FanoutEnable">
+            <summary>
+            Fanout Enable
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Address.NoAddress">
+            <summary>
+            For driver internal purpose only
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.DeviceRegister">
+            <summary>
+            Device register interface for registers with a width of 1, 2 and 3 bytes.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Register.DeviceRegister._bus">
+            <summary>
+            I2C bus instance to be used for reading/writing register from/to device.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister.#ctor(Iot.Device.Si5351.Internal.Address,Iot.Device.Si5351.Internal.Address,Iot.Device.Si5351.Internal.Address)">
+            <summary>
+            Initializes the base class for any derived register with up to 3 addresses.
+            </summary>
+            <param name="addressA">First register address</param>
+            <param name="addressB">Second register address</param>
+            <param name="addressC">Third register address</param>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister.Read">
+            <summary>
+            Reads the register data from the device.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister.Write">
+            <summary>
+            Writes the register data to the device.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister.ReadData">
+            <summary>
+            Performs a read operation.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister.SetBus(Iot.Device.Si5351.Internal.Infrastructure.I2cInterface)">
+            <summary>
+            Sets the reference to the I2cBus instance to be used for any read or write operation.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister.WriteData(System.Byte)">
+            <summary>
+            Writes 'data' to the specified address, first applying a mask to the current content
+            of the address before the write access is performed.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister.WriteData(System.Byte,System.Byte)">
+            <summary>
+            Writes 'data' to the specified address, first applying a mask to the current content
+            of the address before the write access is performed.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister.WriteDataPreserve(System.Byte,System.Byte)">
+            <summary>
+            Writes 'data' to the specified address, first applying a mask to the current content
+            of the address before the write access is performed.
+            Mask: only bits with '1' are modified. All other bits a preserved.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister.WriteDataPreserve(System.Byte,System.Byte,System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Writes 'data' to the specified address, first applying a mask to the current content
+            of the address before the write access is performed.
+            Mask: only bits with '1' are modified. All other bits a preserved.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.DeviceRegister18BitsParameter">
+            <summary>
+            Provides read / write access to a set of registers assembling a 18-bit parameter.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.DeviceRegister18BitsParameter.Parameter">
+            <summary>
+            Parameter value, updated by Read() and used by Write().
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister18BitsParameter.#ctor(Iot.Device.Si5351.Internal.Address,Iot.Device.Si5351.Internal.Address,Iot.Device.Si5351.Internal.Address)">
+            <summary>
+            Initializes a new instance of a device registers set for a 20-bit parameter
+            </summary>
+            <param name="bits_17_16">Address of register with bits 17:16</param>
+            <param name="bits_15_8">Address of register with bits 15:8</param>
+            <param name="bits_7_0">Adress of register with bits 7:0</param>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister18BitsParameter.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister18BitsParameter.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.DeviceRegister20BitsParameter">
+            <summary>
+            Provides read / write access to a set of registers assembling a 20-bit parameter.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Register.DeviceRegister20BitsParameter._addrBitsLocation_19_16">
+            <summary>
+            Location for the relevant parameter bits of a shared register to be set by derived class
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister20BitsParameter.#ctor(Iot.Device.Si5351.Internal.Address,Iot.Device.Si5351.Internal.Register.DeviceRegister20BitsParameter.BitsLocation,Iot.Device.Si5351.Internal.Address,Iot.Device.Si5351.Internal.Address)">
+            <summary>
+            Initializes a new instance of a device registers set for a 20-bit parameter
+            </summary>
+            <param name="bits_19_16">Address of register with bits 19:16</param>
+            <param name="bitsLocation_19_16">Location of bits 19:16 in respective register</param>
+            <param name="bits_15_8">Address of register with bits 15:8</param>
+            <param name="bits_7_0">Adress of register with bits 7:0</param>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.DeviceRegister20BitsParameter.Parameter">
+            <summary>
+            Parameter value, updated by Read() and used by Write().
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister20BitsParameter.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegister20BitsParameter.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.DeviceRegister20BitsParameter.BitsLocation">
+            <summary>
+            Bits where the parameter bits 19:16 are located in the respective register
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Register.DeviceRegister20BitsParameter.BitsLocation.Bits_3_0">
+            <summary>
+            Bits 19:16 are located in bits 3:0
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Register.DeviceRegister20BitsParameter.BitsLocation.Bits_7_4">
+            <summary>
+            Bits 19:16 are located in bits 7:4
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.DeviceRegisters20BitsParameter">
+            <summary>
+            Provides read / write access to a set of registers assembling a 20-bit parameter.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Register.DeviceRegisters20BitsParameter._addrBitsLocation_19_16">
+            <summary>
+            Location for the relevant parameter bits of a shared register to be set by derived class
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegisters20BitsParameter.#ctor(Iot.Device.Si5351.Internal.Address,Iot.Device.Si5351.Internal.Register.DeviceRegisters20BitsParameter.BitsLocation,Iot.Device.Si5351.Internal.Address,Iot.Device.Si5351.Internal.Address)">
+            <summary>
+            Initializes a new instance of a device registers set for a 20-bit parameter
+            </summary>
+            <param name="bits_19_16">Address of register with bits 19:16</param>
+            <param name="bitsLocation_19_16">Location of bits 19:16 in respective register</param>
+            <param name="bits_15_8">Address of register with bits 15:8</param>
+            <param name="bits_7_0">Adress of register with bits 7:0</param>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.DeviceRegisters20BitsParameter.Parameter">
+            <summary>
+            Parameter value, updated by Read() and used by Write().
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegisters20BitsParameter.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceRegisters20BitsParameter.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.DeviceRegisters20BitsParameter.BitsLocation">
+            <summary>
+            Bits where the parameter bits 19:16 are located in the respective register
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Register.DeviceRegisters20BitsParameter.BitsLocation.Bits_3_0">
+            <summary>
+            Bits 19:16 are located in bits 3:0
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Register.DeviceRegisters20BitsParameter.BitsLocation.Bits_7_4">
+            <summary>
+            Bits 19:16 are located in bits 7:4
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.ClockControlRegister">
+            <summary>
+            Base class for CLKx Control registers covering parameters applicable to all registers of this type.
+            Note: some registers vary regarding the valid options for OutputClockInputSource depending on the
+                  clock output number. This class does not check the validity if setting the CLKx_SRC property.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.ClockControlRegister.#ctor(System.Byte)">
+            <summary>
+            Initializes a new instance of a ClockControlRegiser class for a specific clock number.
+            </summary>
+            <param name="number">Clock number 0:7</param>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockControlRegister.CLK_PDN">
+            <summary>
+            Power down state of clock 0:7 output driver.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockControlRegister.MS_SRC">
+            <summary>
+            Source select of MultiSynth X.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockControlRegister.CLK_INV">
+            <summary>
+            Clock output inverted (true, if inverted).
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockControlRegister.CLK_SRC">
+            <summary>
+            Input source of clock output.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockControlRegister.CLK_IDRV">
+            <summary>
+            Drive strength of clock output.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.ClockControlRegister.ReadCommon">
+            <summary>
+            Reads the common register data and populates respective properties.
+            This is to be called from a specific register implementation.
+            </summary>
+            <returns>Data read from register</returns>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.ClockControlRegister.WriteCommon(System.Byte)">
+            <summary>
+            Combines the common and specific register data and writes it to the register.
+            This is to be called from a specific register implementation.
+            Important: the parameter 'data' must be populated with the specific bits only.
+                       All other bits must be set to 0.
+            </summary>
+            <param name="data">Data from specific implementation</param>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.ClockControlRegister0To5">
+            <summary>
+            Represents the CLKx Control register for clocks 0 to 5.
+            It adds the Multisynth integer mode (MSx_INT) setting to the common control settings.
+            This setting is only available for clocks 0 to 5.
+            Addresses:
+                CLK0: 16d/10H
+                CLK1: 17d/11H
+                CLK2: 18d/12H
+                CLK3: 19d/13H
+                CLK4: 20d/14H
+                CLK5: 21d/15H
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.ClockControlRegister0To5.#ctor(System.Byte)">
+            <summary>
+            Initializes a new instance of a ClockControlRegiser0To5 class for a specific clock number.
+            </summary>
+            <param name="number">Clock number 0:5</param>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockControlRegister0To5.MS_INT">
+            <summary>
+            Multisynth operation mode.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.ClockControlRegister0To5.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.ClockControlRegister0To5.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.ClockControlRegister6To7">
+            <summary>
+            Represents the CLKx Control register for clocks 6 to 7.
+            It adds the Feedback A/B Multisynth integer mode (FBA_INT/FBB_INT) setting to the common control settings.
+            This setting is only available for clocks 6 to 7.
+            Addresses:
+                CLK6: 22d/16H
+                CLK7: 23d/17H
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.ClockControlRegister6To7.#ctor(System.Byte)">
+            <summary>
+            Initializes a new instance of a ClockControlRegiser6To7 class for a specific clock number.
+            </summary>
+            <param name="number">Clock number 6:7</param>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockControlRegister6To7.FB_INT">
+            <summary>
+            Multisynth operation mode.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.ClockControlRegister6To7.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.ClockControlRegister6To7.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.ClockDisableStateRegisters">
+            <summary>
+            Represents the registers CLK3-0 Disable State and CLK7-4 Disable State.
+            The settings define the behaviour of the clock outputs (7-0) when it is disabled.
+            This applies to both, disabling using the Output Enable Control register (3h) or
+            the OEB pin.
+            Addresses: 24d/18h, 25d/19h
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.ClockDisableStateRegisters.#ctor">
+            <summary>
+            Initializes a new instance of the ClockDisableStateRegisters class.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockDisableStateRegisters.CLK7_DIS_STATE">
+            <summary>
+            Behaviour of clock 7 if disabled
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockDisableStateRegisters.CLK6_DIS_STATE">
+            <summary>
+            Behaviour of clock 6 if disabled
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockDisableStateRegisters.CLK5_DIS_STATE">
+            <summary>
+            Behaviour of clock 5 if disabled
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockDisableStateRegisters.CLK4_DIS_STATE">
+            <summary>
+            Behaviour of clock 4 if disabled
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockDisableStateRegisters.CLK3_DIS_STATE">
+            <summary>
+            Behaviour of clock 3 if disabled
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockDisableStateRegisters.CLK2_DIS_STATE">
+            <summary>
+            Behaviour of clock 2 if disabled
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockDisableStateRegisters.CLK1_DIS_STATE">
+            <summary>
+            Behaviour of clock 1 if disabled
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.ClockDisableStateRegisters.CLK0_DIS_STATE">
+            <summary>
+            Behaviour of clock 0 if disabled
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.ClockDisableStateRegisters.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.ClockDisableStateRegisters.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.CrystalInternalLoadCapacitanceRegister">
+            <summary>
+            Represents the Crystal Internal Load Capacitance register.
+            Address: 183d/B7h
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.CrystalInternalLoadCapacitanceRegister.#ctor">
+            <summary>
+            Initializes a new instance of the CrystalInternalLoadCapacitanceRegister class.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.CrystalInternalLoadCapacitanceRegister.XtalCl">
+            <summary>
+            Internal load capacitance value for the crystal.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.CrystalInternalLoadCapacitanceRegister.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.CrystalInternalLoadCapacitanceRegister.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.DeviceStatusRegister">
+            <summary>
+            Represents the Device Status register.
+            The flags of this read-only register report general device status information.
+            Address: 0d/00h
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceStatusRegister.#ctor">
+            <summary>
+            Initializes a new instance of the DeviceStatusRegister class.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.DeviceStatusRegister.SYS_INIT">
+            <summary>
+            Flag indicates the status of system initialization (false = device ready).
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.DeviceStatusRegister.LOL_B">
+            <summary>
+            Flag indicates the loss of lock for PLL B (false = PLL B is locked).
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.DeviceStatusRegister.LOL_A">
+            <summary>
+            Flag indicates the loss of lock for PLL A (false = PLL A is locked).
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.DeviceStatusRegister.LOS_CLKIN">
+            <summary>
+            Flag indicates the loss of CLKIN signal (false = valid clock signal at the CLKIN pin).
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.DeviceStatusRegister.LOS_XTAL">
+            <summary>
+            Flag indicates the loss of crystal signal (false = valid crystal signal at the XA and XB pins).
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.DeviceStatusRegister.REVID">
+            <summary>
+            Revision number of the device.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceStatusRegister.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.DeviceStatusRegister.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.FanoutEnableRegister">
+            <summary>
+            Represents the Fanout Enable register.
+            Address: 187d/BBh
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.FanoutEnableRegister.#ctor">
+            <summary>
+            Initializes a new instance of the FanoutEnableRegister class.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.FanoutEnableRegister.ClkinFanoutEn">
+            <summary>
+            Set CLKIN_FANOUT_EN to 'true' to enable fanout of CLKIN to clock output multiplexers.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.FanoutEnableRegister.XoFanoutEn">
+            <summary>
+            Set XO_FANOUT_EN to 'true' to enable fanout of XO to clock output multiplexers.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.FanoutEnableRegister.MsFanoutEn">
+            <summary>
+            Set MS_FANOUT_EN to 'true' to enable fanout of Multisynth0 and Multisynth4 to all output multiplexers.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.FanoutEnableRegister.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.FanoutEnableRegister.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.InterruptStatusMaskRegister">
+            <summary>
+            Represents the interrupt status mask register.
+            Address: 2d/02h
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.InterruptStatusMaskRegister.#ctor">
+            <summary>
+            Initializes a new instance of the InterruptStatusMaskRegister class.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.InterruptStatusMaskRegister.SYS_INIT_MASK">
+            <summary>
+            Setting the SYS_INIT_MASK bit prevents the INTR pin (Si5351C only) from going low when SYS_INIT interrupt occurs.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.InterruptStatusMaskRegister.LOL_B_MASK">
+            <summary>
+            Setting the LOL_B_MASK bit prevents the INTR pin (Si5351C only) from going low when LOL_B interrupt occurs.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.InterruptStatusMaskRegister.LOL_A_MASK">
+            <summary>
+            Setting the LOL_A_MASK bit prevents the INTR pin (Si5351C only) from going low when LOL_A interrupt occurs.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.InterruptStatusMaskRegister.LOS_CLKIN_MASK">
+            <summary>
+            Setting the LOS_CLKIN_MASK bit prevents the INTR pin (Si5351C only) from going low when LOS_CLKIN interrupt occurs.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.InterruptStatusMaskRegister.LOS_XTAL_MASK">
+            <summary>
+            Setting the LOS_XTAL_MASK bit prevents the INTR pin (Si5351C only) from going low when LOS_TAL interrupt occurs.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.InterruptStatusMaskRegister.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.InterruptStatusMaskRegister.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.InterruptStatusStickyRegister">
+            <summary>
+            Represents the Interrupt Status Sticky register.
+            The flags in this register correspond to the state of occurred interrupts.
+            By writing to this register, past occurrences can be reset.
+            Address: 1d/01h
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.InterruptStatusStickyRegister.#ctor">
+            <summary>
+            Initializes a new instance of the InterruptStatusStickyRegister class.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.InterruptStatusStickyRegister.SYS_INIT_STKY">
+            <summary>
+            The SYS_INIT_STKY bit is triggered when the SYS_INIT bit in the device status register is set high.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.InterruptStatusStickyRegister.LOL_B_STKY">
+            <summary>
+            The LOL_B_STKY bit is triggered when the LOL_B bit in the device status register is set high.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.InterruptStatusStickyRegister.LOL_A_STKY">
+            <summary>
+            The LOL_A_STKY bit is triggered when the LOL_A bit in the device status register is set high.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.InterruptStatusStickyRegister.LOS_CLKIN_STKY">
+            <summary>
+            The LOS_CLKIN_STKY bit is triggered when the LOS_CLKIN bit in the device status register is set high.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.InterruptStatusStickyRegister.LOS_XTAL_STKY">
+            <summary>
+            The LOS_XTASL_STKY bit is triggered when the LOS_XTAL bit in the device status register is set high.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.InterruptStatusStickyRegister.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.InterruptStatusStickyRegister.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.Multisynth67Parameter1Register">
+            <summary>
+            Represents the registers of Parameter 1 of the Multisynth 6/7.
+            The parameter has a size of 8 bits.
+            Addresses:
+                Multisynth 6: 90d/5Ah
+                Multisynth 7: 91d/5Bh
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.Multisynth67Parameter1Register.#ctor(Iot.Device.Si5351.Common.MultiSynth)">
+            <summary>
+            Creates a new instance of the Parameter 1 registers for the specified Multisynth 6/7 component.
+            </summary>
+            <param name="multisynth">Target Multisynth (6 or 7)</param>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.Multisynth67Parameter1Register.Parameter">
+            <summary>
+            Parameter 1 value.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.Multisynth67Parameter1Register.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.Multisynth67Parameter1Register.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.MultisynthNParameter1Register">
+            <summary>
+            Represents the (multi-)register of Parameter 1 of the Multisynth NA (PLL A) and NB (PLL B).
+            Parameter 1 is a 18-bit number representing the integer part of the PLLA/PLLB Feedback Multisynth divider.
+            Addresses:
+                PLL A: 28d/1Ch[1:0], 29d/1Eh, 30d/1Fh
+                PLL B: 36d/22h[1:0], 37d/23h, 38d/24h
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.MultisynthNParameter1Register.#ctor(Iot.Device.Si5351.Common.Pll)">
+            <summary>
+            Creates a new instance of the MultisynthNParameter1Register class for the specified PLL component.
+            </summary>
+            <param name="pll">Target PLL</param>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.MultisynthNParameter2Register">
+            <summary>
+            Represents the (multi-)register of Parameter 2 of the Multisynth NA (PLL A) and NB (PLL B).
+            Parameter 2 is a 20-bit number representing the numerator for the fractional part of the
+            PLLA/PLLB Feedback Multisynth divider.
+            Addresses:
+                PLL A: 31d/1Fh[3:0], 32d/20h, 33d/31h
+                PLL B: 39d/27h[3:0], 40d/28h, 41d/29h
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.MultisynthNParameter2Register.#ctor(Iot.Device.Si5351.Common.Pll)">
+            <summary>
+            Creates a new instance of the MultisynthNParameter2Register class for the specified PLL component.
+            </summary>
+            <param name="pll">Target PLL</param>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.MultisynthNParameter3Register">
+            <summary>
+            Represents the (multi-)register of Parameter 3 of the Multisynth NA (PLL A) and NB (PLL B).
+            Parameter 3 is a 20-bit number representing the denominator for the fractional part of the
+            PLLA/PLLB Feedback Multisynth divider.
+            Addresses:
+                PLL A: 26d/1Ah, 27d/1Bh, 31d/1Fh[7:4]
+                PLL B: 34d/22h, 35d/23h, 39d/27h[7:4]
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.MultisynthNParameter3Register.#ctor(Iot.Device.Si5351.Common.Pll)">
+            <summary>
+            Creates a new instance of the MultisynthNParameter3Register class for the specified PLL component.
+            </summary>
+            <param name="pll">Target PLL</param>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.MultisynthOutputDividerRegister">
+             <summary>
+             Represents the Output Divider register for clocks 0:5 and 6:/7.
+             Addresses:
+                 Output divider clock 0: 44d/2Ch
+                 Output divider clock 1: 52d/34h
+                 Output divider clock 2: 60d/3Ch
+                 Output divider clock 3: 68d/44h
+                 Output divider clock 4: 76d/4Ch
+                 Output divider clock 5: 84d/54h
+             Documentation: AN619, Skyworks Solutions Inc.
+             The output dividers for clock 0 to 5 are stored in registers starting from the address of the Output Divider register for Clock 0,
+             with each subsequent register at intervals of 8 bytes. Each of these registers follows the same layout.
+             In addition to the divider settings, these registers also contain a portion of another Multisynth parameter (P1 17:16), which is, however,
+             ignored when reading and writing the divider parameters.
+            
+             Output dividers for Multisynth 6 and 7 are stored in a different layout, hence they are handled differently.
+             Address:
+                 Output dividier clock 6/7: 92d/5Ch
+            
+             </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.MultisynthOutputDividerRegister.#ctor(Iot.Device.Si5351.Common.MultiSynth)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Iot.Device.Si5351.Internal.Register.MultisynthOutputDividerRegister"/> class.
+            </summary>
+            <param name="multisynth">Target Multisynth (0 to 7)</param>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.MultisynthOutputDividerRegister.Divider">
+            <summary>
+            Output divider of Multisynth
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.MultisynthOutputDividerRegister.DivideBy4">
+            <summary>
+            Divide by 4 enabled for Multisynth (only Multisynth 0:5, otherwise always false)
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.MultisynthOutputDividerRegister.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.MultisynthOutputDividerRegister.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.MultisynthParameter1Register">
+            <summary>
+            Represents the registers of Parameter 1 of the Multisynth 0..5
+            Parameter 1 is a 18-bit number representing the integer part of the Multisynth 0..5 divider.
+            Addresses:
+                MS0: 45d/2Dh, 46d/2Eh, 44d/2Ch[1:0]
+                MS1: 53d/35h, 54d/36h, 52d/34h[1:0]
+                MS2: 61d/3Dh, 62d/3Eh, 60d/3Ch[1:0]
+                MS3: 59d/45h, 60d/46h, 68d/44h[1:0]
+                MS4: 77d/4Dh, 78d/4Eh, 76d/4Ch[1:0]
+                MS5: 85d/55h, 86d/56h, 84d/54h[1:0]
+            Documentation: AN619, Skyworks Solutions Inc.
+            The memory layout for the Multisynth 0 to 5 is a sequence of consecutive register sets
+            (P1 to P3 and auxiliary registers), each consisting of 8 bytes, starting from the base address.
+            Therefore the specific addresses are calculated by multiplying the size with the number of the MS.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.MultisynthParameter1Register.#ctor(Iot.Device.Si5351.Common.MultiSynth)">
+            <summary>
+            Creates a new instance of the Parameter 1 registers for the specified Multisynth circuit.
+            </summary>
+            <param name="multisynth">Target Multisynth (0 to 5)</param>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.MultisynthParameter2Register">
+            <summary>
+            Represents the registers of Parameter 2 of the Multisynth 0..5
+            Parameter 2 is a 20-bit number representing the nominator for the fractional part of
+            the Multisynth 0..5 divider.
+            Addresses:
+                MS0: 48d/30h, 49d/31h, 47d/2Fh[3:0]
+                MS1: 56d/38h, 57d/39h, 55d/37h[3:0]
+                MS2: 64d/40h, 65d/41h, 63d/3Fh[3:0]
+                MS3: 72d/48h, 73d/49h, 71d/47h[3:0]
+                MS4: 80d/50h, 81d/51h, 79d/4Fh[3:0]
+                MS5: 88d/58h, 89d/59h, 87d/57h[3:0]
+            Documentation: AN619, Skyworks Solutions Inc.
+            The memory layout for the Multisynth 0 to 5 is a sequence of consecutive register sets
+            (P1 to P3 and auxiliary registers), each consisting of 8 bytes, starting from the base address.
+            Therefore the specific addresses are calculated by multiplying the size with the number of the MS.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.MultisynthParameter2Register.#ctor(Iot.Device.Si5351.Common.MultiSynth)">
+            <summary>
+            Creates a new instance of the Parameter 2 registers for the specified Multisynth circuit.
+            </summary>
+            <param name="multisynth">Target Multisynth (0 to 5)</param>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.MultisynthParameter3Register">
+            <summary>
+            Represents the registers of Parameter 3 of the Multisynth 0..5
+            Parameter 3 is a 20-bit number representing the denominator for the fractional part of
+            the Multisynth 0..5 divider.
+            Addresses:
+                MS0: 42d/2Ah, 43d/2Bh, 47d/2Fh[7:4]
+                MS1: 50d/32h, 51d/33h, 55d/37h[7:4]
+                MS2: 58d/3Ah, 59d/3Bh, 63d/3Fh[7:4]
+                MS3: 66d/42h, 67d/43h, 71d/47h[7:4]
+                MS4: 74d/4Ah, 75d/4Bh, 79d/4Fh[7:4]
+                MS5: 82d/52h, 83d/53h, 87d/57h[7:4]
+            Documentation: AN619, Skyworks Solutions Inc.
+            The memory layout for the Multisynth 0 to 5 is a sequence of consecutive register sets
+            (P1 to P3 and auxiliary registers), each consisting of 8 bytes, starting from the base address.
+            Therefore the specific addresses are calculated by multiplying the size with the number of the MS.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.MultisynthParameter3Register.#ctor(Iot.Device.Si5351.Common.MultiSynth)">
+            <summary>
+            Creates a new instance of the Parameter 3 registers for the specified Multisynth circuit.
+            </summary>
+            <param name="multisynth">Target Multisynth (0 to 5)</param>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.OebPinEnableControlMaskRegister">
+            <summary>
+            Represents the OEB Pin Enable Control Mask register.
+            Address: 9d/09h
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.OebPinEnableControlMaskRegister.#ctor">
+            <summary>
+            Initializes a new instance of the OebPinEnableControlMaskRegister class.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OebPinEnableControlMaskRegister.OEB_MASK7">
+            <summary>
+            Setting controls whether the OEB pin controls the enable/disable state of CLK7 output.
+            False: OEB pin controls enable/disable state of CLK7 output.
+            True: OEB pin does not control enable/disable state of CLK7 output.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OebPinEnableControlMaskRegister.OEB_MASK6">
+            <summary>
+            Setting controls whether the OEB pin controls the enable/disable state of CLK6 output.
+            False: OEB pin controls enable/disable state of CLK6 output.
+            True: OEB pin does not control enable/disable state of CLK6 output.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OebPinEnableControlMaskRegister.OEB_MASK5">
+            <summary>
+            Setting controls whether the OEB pin controls the enable/disable state of CLK5 output.
+            False: OEB pin controls enable/disable state of CLK5 output.
+            True: OEB pin does not control enable/disable state of CLK5 output.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OebPinEnableControlMaskRegister.OEB_MASK4">
+            <summary>
+            Setting controls whether the OEB pin controls the enable/disable state of CLK4 output.
+            False: OEB pin controls enable/disable state of CLK4 output.
+            True: OEB pin does not control enable/disable state of CLK4 output.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OebPinEnableControlMaskRegister.OEB_MASK3">
+            <summary>
+            Setting controls whether the OEB pin controls the enable/disable state of CLK3 output.
+            False: OEB pin controls enable/disable state of CLK3 output.
+            True: OEB pin does not control enable/disable state of CLK3 output.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OebPinEnableControlMaskRegister.OEB_MASK2">
+            <summary>
+            Setting controls whether the OEB pin controls the enable/disable state of CLK2 output.
+            False: OEB pin controls enable/disable state of CLK2 output.
+            True: OEB pin does not control enable/disable state of CLK2 output.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OebPinEnableControlMaskRegister.OEB_MASK1">
+            <summary>
+            Setting controls whether the OEB pin controls the enable/disable state of CLK1 output.
+            False: OEB pin controls enable/disable state of CLK1 output.
+            True: OEB pin does not control enable/disable state of CLK1 output.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OebPinEnableControlMaskRegister.OEB_MASK0">
+            <summary>
+            Setting controls whether the OEB pin controls the enable/disable state of CLK0 output.
+            False: OEB pin controls enable/disable state of CLK0 output.
+            True: OEB pin does not control enable/disable state of CLK0 output.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OebPinEnableControlMaskRegister.Item(System.Int32)">
+            <summary>
+            Gets or sets the state of the output selected by the index
+            </summary>
+            <exception cref="T:System.IndexOutOfRangeException">Thrown if index not with the range of 0..7</exception>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.OebPinEnableControlMaskRegister.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.OebPinEnableControlMaskRegister.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.OutputEnableControlRegister">
+            <summary>
+            Represents the output enable register.
+            Address: 3d/03h
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.OutputEnableControlRegister.#ctor">
+            <summary>
+            Initializes a new instance of the OutputEnableControlRegister class.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OutputEnableControlRegister.CLK7_OEB">
+            <summary>
+            State of output driver for clock 7 (false=enabled, true=disabled)
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OutputEnableControlRegister.CLK6_OEB">
+            <summary>
+            State of output driver for clock 6 (false=enabled, true=disabled)
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OutputEnableControlRegister.CLK5_OEB">
+            <summary>
+            State of output driver for clock 5 (false=enabled, true=disabled)
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OutputEnableControlRegister.CLK4_OEB">
+            <summary>
+            State of output driver for clock 4 (false=enabled, true=disabled)
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OutputEnableControlRegister.CLK3_OEB">
+            <summary>
+            State of output driver for clock 3 (false=enabled, true=disabled)
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OutputEnableControlRegister.CLK2_OEB">
+            <summary>
+            State of output driver for clock 2 (false=enabled, true=disabled)
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OutputEnableControlRegister.CLK1_OEB">
+            <summary>
+            State of output driver for clock1 (false=enabled, true=disabled)
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OutputEnableControlRegister.CLK0_OEB">
+            <summary>
+            State of output driver for clock 0 (false=enabled, true=disabled)
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.OutputEnableControlRegister.Item(System.Int32)">
+            <summary>
+            Gets or sets the state of the output selected by the index
+            </summary>
+            <exception cref="T:System.IndexOutOfRangeException">Thrown if index not with the range of 0..7</exception>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.OutputEnableControlRegister.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.OutputEnableControlRegister.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.PllInputSourceRegister">
+            <summary>
+            Represents the PLL Input Source register.
+            Address: 15d/0Fh
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.PllInputSourceRegister.#ctor">
+            <summary>
+            Initializes a new instance of the PllInputSourceRegister class.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.PllInputSourceRegister.CLKIN_DIV">
+            <summary>
+            Input divider for CLKIN signal.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.PllInputSourceRegister.PLLB_SRC">
+            <summary>
+            Input source select for PLL B.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.PllInputSourceRegister.PLLA_SRC">
+            <summary>
+            Input source select for PLL A.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.PllInputSourceRegister.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.PllInputSourceRegister.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Register.PllResetRegister">
+            <summary>
+            Represents the PLL Reset register.
+            Address: 177d/B1h
+            Documentation: AN619, Skyworks Solutions Inc.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.PllResetRegister.#ctor">
+            <summary>
+            Initializes a new instance of the PllResetRegister class.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.PllResetRegister.PllARst">
+            <summary>
+            Setting this flag to 'true' will reset PLL A when writing the register to the device.
+            Important: the corresponding bit in the device register is self clearing.
+            Therefore resulting always in a 'false' state when reading back.
+            </summary>
+        </member>
+        <member name="P:Iot.Device.Si5351.Internal.Register.PllResetRegister.PllBRst">
+            <summary>
+            Setting this flag to 'true' will reset PLL B when writing the register to the device.
+            Important: the corresponding bit in the device register is self clearing.
+            Therefore resulting always in a 'false' state when reading back.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.PllResetRegister.Read">
+            <inheritdoc/>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Register.PllResetRegister.Write">
+            <inheritdoc/>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Infrastructure.I2cInterface">
+            <summary>
+            Represents an convinient interface to the I2C bus in the context of this binding.
+            It provides aids to simplify read and write operations.
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Infrastructure.I2cInterface.#ctor(System.Device.I2c.I2cDevice)">
+            <summary>
+            Initializes a new instance
+            </summary>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Infrastructure.I2cInterface.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Infrastructure.I2cInterface.Read(System.Byte,System.Span{System.Byte})">
+            <summary>
+            Reads bytes from the device register
+            </summary>
+            <param name="registerAddress">Register address</param>
+            <param name="buffer">Bytes to be read from the register</param>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Infrastructure.I2cInterface.Read(System.Byte)">
+            <summary>
+            Reads a byte from a device register
+            </summary>
+            <param name="registerAddress">Register address</param>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Infrastructure.I2cInterface.Read(Iot.Device.Si5351.Internal.Address)">
+            <summary>
+            Reads a byte from a device register
+            </summary>
+            <param name="registerAddress">Register address</param>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Infrastructure.I2cInterface.Read(System.Int32)">
+            <summary>
+            Reads a byte from a device register
+            </summary>
+            <param name="registerAddress">Register address</param>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Infrastructure.I2cInterface.Write(System.Byte,System.Span{System.Byte})">
+            <summary>
+            Writes bytes to the device register
+            </summary>
+            <param name="registerAddress">Register address</param>
+            <param name="data">Bytes to be written to the register</param>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Infrastructure.I2cInterface.Write(System.Byte,System.Byte)">
+            <summary>
+            Writes a single byte to the device register
+            </summary>
+            <param name="registerAddress">Register address</param>
+            <param name="data">Byte to be written to the register</param>
+        </member>
+        <member name="M:Iot.Device.Si5351.Internal.Infrastructure.I2cInterface.Write(Iot.Device.Si5351.Internal.Address,System.Byte)">
+            <summary>
+            Writes a single byte to the device register
+            </summary>
+            <param name="registerAddress">Register address</param>
+            <param name="data">Byte to be written to the register</param>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Common.ClockInversionState">
+            <summary>
+            Set of defined inversion states for clock outputs.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Common.ClockInversionState.NotInverted">
+            <summary>
+            Clock output is not inverted.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Common.ClockInversionState.Inverted">
+            <summary>
+            Clock output is inverted.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Internal.Common.OperationMode">
+            <summary>
+            Set of operation modes for Multisynths 0 to 5.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Common.OperationMode.Fractional">
+            <summary>
+            Multisynth operates in fractional division mode.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Internal.Common.OperationMode.Integer">
+            <summary>
+            Multisynth operates in integer division mode.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Common.ClkinInputDivider">
+            <summary>
+            Defines the set of available input dividers for CLKIN signal.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.ClkinInputDivider.Div1">
+            <summary>
+            Divide by 1
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.ClkinInputDivider.Div2">
+            <summary>
+            Divide by 2
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.ClkinInputDivider.Div4">
+            <summary>
+            Divide by 4
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.ClkinInputDivider.Div8">
+            <summary>
+            Divide by 8
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Common.CrystalLoadCapacitance">
+            <summary>
+            Set of available internal load capacitances for the crystal.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.CrystalLoadCapacitance.Reserved">
+            <summary>
+            Do not select this option
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.CrystalLoadCapacitance.Cl6pF">
+            <summary>
+            Internal capacitance load = 6 pF
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.CrystalLoadCapacitance.Cl8pF">
+            <summary>
+            Internal capacitance load = 8 pF
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.CrystalLoadCapacitance.Cl10pF">
+            <summary>
+            Internal capacitance load = 10 pF
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Common.DisableState">
+            <summary>
+            Defines the set of available disable states.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.DisableState.LOW">
+            <summary>
+            CLKx is set to a low state when disabled
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.DisableState.HIGH">
+            <summary>
+            CLKx is set to a high state when disabled
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.DisableState.HIGH_IMPEDANCE">
+            <summary>
+            CLKx is set to a high impedance state when disabled
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.DisableState.NEVER_DISABLED">
+            <summary>
+            CLKx is set to be never disabled WAS MEINT DAS EIGENTLICH??? AUSPROBIEREN!!!
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Common.DriveStrength">
+            <summary>
+            Set of available drive strengths.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.DriveStrength.Strength2mA">
+            <summary>
+            Drive strength 2 mA
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.DriveStrength.Strength4mA">
+            <summary>
+            Drive strength 4 mA
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.DriveStrength.Strength6mA">
+            <summary>
+            Drive strength 6 mA
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.DriveStrength.Strength8mA">
+            <summary>
+            Drive strength 8 mA
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Common.InputSource">
+            <summary>
+            Defines the set of available input sources for PLLx.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.InputSource.XTAL">
+            <summary>
+            XTAL input
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.InputSource.CLKIN">
+            <summary>
+            CLKIN input
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Common.MultiSynth">
+            <summary>
+            Defines the set of available MultiSynth components.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.MultiSynth.MS0">
+            <summary>
+            MultiSynth 0
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.MultiSynth.MS1">
+            <summary>
+            MultiSynth 1
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.MultiSynth.MS2">
+            <summary>
+            MultiSynth 2
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.MultiSynth.MS3">
+            <summary>
+            MultiSynth 3
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.MultiSynth.MS4">
+            <summary>
+            MultiSynth 4
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.MultiSynth.MS5">
+            <summary>
+            MultiSynth 5
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.MultiSynth.MS6">
+            <summary>
+            MultiSynth 6
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.MultiSynth.MS7">
+            <summary>
+            MultiSynth 7
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Common.MultiSynthSource">
+            <summary>
+            Set of available MultiSynth sources.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.MultiSynthSource.PllA">
+            <summary>
+            PLL A is source
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.MultiSynthSource.PllB_Vcxo">
+            <summary>
+            PLL B (Si5351A/C only) or VCXO (Si5351B only) is source
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Common.OutputClockInputSource">
+            <summary>
+            Set of defined clock output input sources.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.OutputClockInputSource.XTAL">
+            <summary>
+            XTAL is clock output source
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.OutputClockInputSource.CLKIN">
+            <summary>
+            CLKIN is clock output source (by-passes both synthesis stages - PLL/VCXO and MultiSynth).
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.OutputClockInputSource.Reserved">
+            <summary>
+            Reserved bits (only clock output 0 and 4).
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.OutputClockInputSource.MS0">
+            <summary>
+            Only: MS0 as clock output source for clock output 1, 2 and 3.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.OutputClockInputSource.MS4">
+            <summary>
+            Only: MS4 as clock output source for clock output 5, 6 and 7.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.OutputClockInputSource.MSx">
+            <summary>
+            Corresponding Multisynth is clock output source.
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Common.OutputDivider">
+            <summary>
+            Defines the set of Multisynth dividers
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.OutputDivider.Div1">
+            <summary>
+            Divide by 1
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.OutputDivider.Div2">
+            <summary>
+            Divide by 2
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.OutputDivider.Div4">
+            <summary>
+            Divide by 4
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.OutputDivider.Div8">
+            <summary>
+            Divide by 8
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.OutputDivider.Div16">
+            <summary>
+            Divide by 16
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.OutputDivider.Div32">
+            <summary>
+            Divide by 32
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.OutputDivider.Div64">
+            <summary>
+            Divide by 64
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.OutputDivider.Div128">
+            <summary>
+            Divide by 128
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Common.Pll">
+            <summary>
+            Defines the set of available PLL circuits
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.Pll.A">
+            <summary>
+            PLL A circuit
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.Pll.B">
+            <summary>
+            PLL B circuit
+            </summary>
+        </member>
+        <member name="T:Iot.Device.Si5351.Common.PowerState">
+            <summary>
+            Set of available power states for the clock output driver.
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.PowerState.PoweredUp">
+            <summary>
+            Output driver is powered up
+            </summary>
+        </member>
+        <member name="F:Iot.Device.Si5351.Common.PowerState.PoweredDown">
+            <summary>
+            Output driver is powered down
+            </summary>
+        </member>
+        <member name="T:Si5351.Internal.Logic.MultiSynthConfigurator">
+            <summary>
+            Determines parameters P1, P2 and P3 for configuring a MultiSynth component.
+            </summary>
+        </member>
+        <member name="M:Si5351.Internal.Logic.MultiSynthConfigurator.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Si5351.Internal.Logic.MultiSynthConfigurator"/> class.
+            </summary>
+            <param name="fVco">Intermediate VCO frequency [Hz]</param>
+            <param name="fOut">Clock output frequency [Hz]</param>
+        </member>
+    </members>
+</doc>
