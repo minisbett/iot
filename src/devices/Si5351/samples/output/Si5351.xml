@@ -1703,9 +1703,10 @@
             Set of available internal load capacitances for the crystal.
             </summary>
         </member>
-        <member name="F:Iot.Device.Si5351.Common.CrystalLoadCapacitance.Reserved">
+        <member name="F:Iot.Device.Si5351.Common.CrystalLoadCapacitance.Cl0pF">
             <summary>
-            Do not select this option
+            Internal capicatance load = 0 pF
+            AN619 recommends "Do not select this option."
             </summary>
         </member>
         <member name="F:Iot.Device.Si5351.Common.CrystalLoadCapacitance.Cl6pF">
@@ -1958,14 +1959,117 @@
             Output driver is powered down
             </summary>
         </member>
+        <member name="T:Si5351.Internal.Logic.MultiSynthCalculationResult">
+            <summary>
+            Represents the result of a <see cref="M:Si5351.Internal.Logic.MultiSynthConfigurator.Calculate(System.Int32,System.Nullable{System.Double})"/> operation,
+            containing the resulting M, N, R and DB4 value, as well as whether we can use integer-only mode.
+            </summary>
+        </member>
+        <member name="P:Si5351.Internal.Logic.MultiSynthCalculationResult.M">
+            <summary>
+            The multiplier for the PLL.
+            </summary>
+        </member>
+        <member name="P:Si5351.Internal.Logic.MultiSynthCalculationResult.N">
+            <summary>
+            The divider for the stage 2 synth.
+            </summary>
+        </member>
+        <member name="P:Si5351.Internal.Logic.MultiSynthCalculationResult.R">
+            <summary>
+            The output divider for the clock.
+            </summary>
+        </member>
+        <member name="P:Si5351.Internal.Logic.MultiSynthCalculationResult.DivideBy4">
+            <summary>
+            Bool whether the divide by 4 mode is enabled.
+            </summary>
+        </member>
+        <member name="P:Si5351.Internal.Logic.MultiSynthCalculationResult.IntegerMode">
+            <summary>
+            Bool whether all values are integer, meaning the integer-only mode can be enabled.
+            </summary>
+        </member>
         <member name="T:Si5351.Internal.Logic.MultiSynthConfigurator">
             <summary>
             Determines parameters P1, P2 and P3 for configuring a MultiSynth component.
             </summary>
         </member>
-        <member name="M:Si5351.Internal.Logic.MultiSynthConfigurator.#ctor(System.Int32,System.Int32)">
+        <member name="F:Si5351.Internal.Logic.MultiSynthConfigurator._fRef">
             <summary>
-            Initializes a new instance of the <see cref="T:Si5351.Internal.Logic.MultiSynthConfigurator"/> class.
+            The reference frequency, either from the Xtal or CLCKIN.
+            </summary>
+        </member>
+        <member name="F:Si5351.Internal.Logic.MultiSynthConfigurator._fOuts">
+            <summary>
+            The output frequencies of the clocks.
+            </summary>
+        </member>
+        <member name="F:Si5351.Internal.Logic.MultiSynthConfigurator._enabled">
+            <summary>
+            The enabled states of the clocks.
+            </summary>
+        </member>
+        <member name="M:Si5351.Internal.Logic.MultiSynthConfigurator.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Si5351.Internal.Logic.MultiSynthConfigurator"/> class with the given reference frequency.
+            </summary>
+            <param name="fRef">The Reference frequency, either from the Xtal or CLCKIN.</param>
+        </member>
+        <member name="M:Si5351.Internal.Logic.MultiSynthConfigurator.SetClockState(System.Int32,System.Boolean)">
+            <summary>
+            Sets the enabled state of the given clock by it's id.
+            </summary>
+            <param name="clockId">The clock id.</param>
+            <param name="state">The state.</param>
+        </member>
+        <member name="M:Si5351.Internal.Logic.MultiSynthConfigurator.SetFrequency(System.Int32,System.Int32)">
+            <summary>
+            Sets the frequency of the given clock by it's id.
+            </summary>
+            <param name="clockId">The clock id.</param>
+            <param name="frequency">The frequency.</param>
+        </member>
+        <member name="M:Si5351.Internal.Logic.MultiSynthConfigurator.Apply">
+            <summary>
+            Performs a readjustment of the MultiSynth parameters to provide the targetted frequencies on the clocks.
+            </summary>
+        </member>
+        <member name="M:Si5351.Internal.Logic.MultiSynthConfigurator.Calculate(System.Int32,System.Nullable{System.Double})">
+            <summary>
+            Calculates the M, N, R and DB4 value for the given output frequency.
+            If no values could be found, an exception is thrown since this should never happen with valid input.
+            </summary>
+            <param name="fOut">The output frequency.</param>
+            <param name="forcedM">An internal parameter to force an M value.</param>
+            <returns>The M, N, R and DB4 value for the given output frequency.</returns>
+        </member>
+        <member name="M:Si5351.Internal.Logic.MultiSynthConfigurator.FindABC(System.Double,System.Int32)">
+            <summary>
+            Finds an A-B-C pair for the given decimal number with the equation a + b/c. A, B and C are all integer values.
+            The maximum parameter specified the maximum value for C. This results in a possible accuracy loss through disposed decimals.
+            A is automatically assumed to be the whole-number part of the decimal, b/c represents the decimals.
+            </summary>
+            <param name="dec">The decimal number.</param>
+            <param name="max">The maximum number for C.</param>
+            <returns>The A-B-C pair for the given decimal number.</returns>
+        </member>
+        <member name="M:Si5351.Internal.Logic.MultiSynthConfigurator.GCD(System.Int32,System.Int32)">
+            <summary>
+            Returns the greatest common divisor of the two given values.
+            </summary>
+            <param name="a">The first value.</param>
+            <param name="b">The second value.</param>
+            <returns>The greatest common divisor of the two given values.</returns>
+        </member>
+        <member name="T:Si5351.Internal.Logic.MultiSynthConfigurator_old">
+            <summary>
+            Determines parameters P1, P2 and P3 for configuring a MultiSynth component.
+            </summary>
+        </member>
+        <member name="M:Si5351.Internal.Logic.MultiSynthConfigurator_old.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Si5351.Internal.Logic.MultiSynthConfigurator_old"/> class.
             </summary>
             <param name="fVco">Intermediate VCO frequency [Hz]</param>
             <param name="fOut">Clock output frequency [Hz]</param>

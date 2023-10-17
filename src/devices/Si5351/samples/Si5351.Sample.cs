@@ -6,6 +6,7 @@ using System.Device.I2c;
 using System.IO;
 using Iot.Device.Si5351;
 using Iot.Device.Si5351.Internal.Register;
+using Si5351.Internal.Logic;
 using Si5351.Samples;
 
 internal class Program
@@ -31,7 +32,7 @@ internal class Program
             Console.WriteLine("(SST) Show Status");
             Console.WriteLine("(CBS) Load Clock Builder settings file");
             Console.WriteLine("(OES) Output enable status");
-            Console.WriteLine("(PLG) Playground");
+            Console.WriteLine("(CFG) Configurator");
             Console.WriteLine("(RAC) Register access console");
             Console.WriteLine("(DUM) Dump all registers");
             Console.WriteLine("(QQQ) Quit");
@@ -57,8 +58,8 @@ internal class Program
                     OutputEnableState();
                     break;
 
-                case "PLG":
-                    Playground();
+                case "CFG":
+                    Configurator();
                     break;
 
                 case "RAC":
@@ -163,39 +164,34 @@ internal class Program
         return v;
     }
 
-    private static void Playground()
+    private static void Configurator()
     {
-        // synthesis stage 2
-        int a = 56;
-        int b = 0;
-        int c = 1;
+        Console.Clear();
 
-        int p1 = (int)(128d * a + Math.Floor(128d * b / c) - 512d);
-        int p2 = (int)(128 * b - c * Math.Floor(120d * b / c));
-        int p3 = c;
+        MultiSynthConfigurator configurator = new MultiSynthConfigurator((int)25e6);
+        for (int i = 0; i < 3; i++)
+        {
+            Console.Write($"Clock {i} (Leave empty to disable): ");
+            if (!int.TryParse(Console.ReadLine()!.Replace("khz", "000").Replace("mhz", "000000"), out int frequency))
+            {
+                configurator.SetClockState(i, false);
+                continue;
+            }
 
-        MultisynthParameter1Register p1Reg = new(Iot.Device.Si5351.Common.MultiSynth.MS0);
-        MultisynthParameter2Register p2Reg = new(Iot.Device.Si5351.Common.MultiSynth.MS0);
-        MultisynthParameter3Register p3Reg = new(Iot.Device.Si5351.Common.MultiSynth.MS0);
-        p1Reg.Parameter = p1;
-        p2Reg.Parameter = p2;
-        p3Reg.Parameter = p3;
-        p1Reg.Write();
-        p2Reg.Write();
-        p3Reg.Write();
+            configurator.SetClockState(i, true);
 
-        MultisynthOutputDividerRegister divReg = new(Iot.Device.Si5351.Common.MultiSynth.MS0);
-        divReg.Read();
-        Console.WriteLine($"R0 Output Divider: {divReg.Divider}");
-        Console.WriteLine($"DivBy4: {divReg.DivideBy4}");
-        divReg.Divider = Iot.Device.Si5351.Common.OutputDivider.Div1;
-        divReg.DivideBy4 = false;
-        divReg.Write();
+            try
+            {
+                configurator.SetFrequency(i, frequency);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Cannot set frequency: {ex.Message}\n");
+                i--;
+            }
+        }
 
-        divReg.Read();
-        Console.WriteLine($"R0 Output Divider: {divReg.Divider}");
-        Console.WriteLine($"DivBy4: {divReg.DivideBy4}");
-        Console.ReadKey();
+        configurator.Apply();
     }
 
     private static void DumpRegisters()
