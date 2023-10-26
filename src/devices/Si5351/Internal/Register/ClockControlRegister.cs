@@ -103,10 +103,10 @@ namespace Iot.Device.Si5351.Internal.Register
             };
             data |= CLK_IDRV switch
             {
-                DriveStrength.Strength2mA => throw new NotImplementedException(),
-                DriveStrength.Strength4mA => throw new NotImplementedException(),
-                DriveStrength.Strength6mA => throw new NotImplementedException(),
-                DriveStrength.Strength8mA => throw new NotImplementedException(),
+                DriveStrength.Strength2mA => 0b00,
+                DriveStrength.Strength4mA => 0b01,
+                DriveStrength.Strength6mA => 0b10,
+                DriveStrength.Strength8mA => 0b11,
                 _ => throw new Exception("Invalid value for drive strength")
             };
 

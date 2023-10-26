@@ -119,14 +119,14 @@ namespace Iot.Device.Si5351.Internal.Register
         public override void Read()
         {
             byte data = ReadData().DataA;
-            CLK7_OEB = (data & 0b1000_0000) == 1;
-            CLK6_OEB = (data & 0b0100_0000) == 1;
-            CLK5_OEB = (data & 0b0010_0000) == 1;
-            CLK4_OEB = (data & 0b0001_0000) == 1;
-            CLK3_OEB = (data & 0b0000_1000) == 1;
-            CLK2_OEB = (data & 0b0000_0100) == 1;
-            CLK1_OEB = (data & 0b0000_0010) == 1;
-            CLK0_OEB = (data & 0b0000_0001) == 1;
+            CLK7_OEB = (data & 0b1000_0000) > 0;
+            CLK6_OEB = (data & 0b0100_0000) > 0;
+            CLK5_OEB = (data & 0b0010_0000) > 0;
+            CLK4_OEB = (data & 0b0001_0000) > 0;
+            CLK3_OEB = (data & 0b0000_1000) > 0;
+            CLK2_OEB = (data & 0b0000_0100) > 0;
+            CLK1_OEB = (data & 0b0000_0010) > 0;
+            CLK0_OEB = (data & 0b0000_0001) > 0;
         }
 
         /// <inheritdoc/>
